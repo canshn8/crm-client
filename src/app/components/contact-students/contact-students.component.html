@@ -1,0 +1,197 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Ad Soyad</th>
+      <th scope="col">Cep Telefonu</th>
+      <th scope="col">Conf Personeli</th>
+      <th scope="col">Kariyer Danışmanı</th>
+      <th scope="col">Data Kaynağı</th>
+      <th scope="col">İlgilendiği Eğitim</th>
+      <th scope="col">Yorum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let studentCt of studentsContact">
+      <td scope="col">{{ studentCt.name }}</td>
+      <td scope="col">{{ studentCt.no }}</td>
+      <td scope="col">{{ studentCt.staff }}</td>
+      <td scope="col">{{ studentCt.careerCounselor }}</td>
+      <td scope="col">{{ studentCt.dataSource }}</td>
+      <td scope="col">{{ studentCt.interestedEducation }}</td>
+      <td scope="col">{{ studentCt.comment }}</td>
+
+      <td data-bs-toggle="modal" data-bs-target="#info">
+        <i id="icon" class="bi bi-info-circle"></i>
+      </td>
+      <!-- 
+        <td scope="col">
+          <i data-bs-toggle="modal" data-bs-target="#exUpdate" data-bs-whatever="@getbootstrap"
+            (click)="getStudentByMail(student.email)" id="icon" class="bi bi-pencil-square"></i>
+        </td>
+  
+        <td scope="col">
+          <i (click)="deleteStudent(student.id)" id="icon" class="bi bi-person-dash"></i>
+        </td> -->
+
+      <div
+        class="modal fade bg-transparent"
+        id="info"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                {{ studentCt.name }}
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-title">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                <span class="p-3">Rapor:</span>
+              </h1>
+            </div>
+            <div class="modal-body">
+              {{ studentCt.comment }}
+              {{ studentCt.name }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </tr>
+  </tbody>
+</table>
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#noReg"
+  data-bs-whatever="@getbootstrap"
+>
+  <i class="bi bi-person-fill-add">Kayıt Olmadı</i>
+</button>
+<div
+  class="modal fade modal-xl"
+  id="noReg"
+  tabindex="-1"
+  aria-labelledby="noReg"
+  aria-hidden="true"
+>
+  <h1>Randevu Tablosu</h1>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          İletişim Ekleme Formu
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="contactForm" class="row">
+          <div class="col-md-6">
+            <div class="form-outline mb-4">
+              <label class="form-label" for="nameCt"> Adı Soyadı</label>
+              <input
+                type="text"
+                id="nameCt"
+                formControlName="nameCt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="noCt"> Cep Telefonu </label>
+              <input
+                type="tel"
+                id="noCt"
+                formControlName="noCt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="staffCt"> Conf Personeli</label>
+              <select class="form-select p-2" formControlName="staffCt">
+                <option value="instagram">İnstagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="website">Web Site</option>
+                <option value="ref">Referans</option>
+                <option value="outsidecaller">Dışarıdan Arayan</option>
+                <option value="outsideincoming">Dışarıdan Gelen</option>
+                <option value="another">Diğer...</option>
+              </select>
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="dataSourceCt">Data Kaynağı</label>
+              <select class="form-select p-2" formControlName="dataSourceCt">
+                <option value="instagram">İnstagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="website">Web Site</option>
+                <option value="ref">Referans</option>
+                <option value="outsidecaller">Dışarıdan Arayan</option>
+                <option value="outsideincoming">Dışarıdan Gelen</option>
+                <option value="another">Diğer...</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-outline mb-4">
+              <label class="form-label" for="interestedEducationCt"
+                >İlgilendiği Eğitim</label
+              >
+              <input
+                type="text"
+                id="interestedEducationCt"
+                formControlName="interestedEducationCt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="careerCounselorCt"
+                >Kariyer Danışmanı</label
+              >
+              <select
+                class="form-select p-2"
+                formControlName="careerCounselorCt"
+              >
+                <option value="instagram">İnstagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="website">Web Site</option>
+                <option value="ref">Referans</option>
+                <option value="outsidecaller">Dışarıdan Arayan</option>
+                <option value="outsideincoming">Dışarıdan Gelen</option>
+                <option value="another">Diğer...</option>
+              </select>
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="comment">Yorum</label>
+              <textarea
+                id="comment"
+                formControlName="comment"
+                cols="65"
+                rows="6"
+              ></textarea>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg btn-block"
+            (click)="addForContact()"
+          >
+            İletişim İçin Ekle
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>

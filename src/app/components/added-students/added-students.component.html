@@ -1,0 +1,391 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Adı</th>
+      <th scope="col">Soyadı</th>
+      <th scope="col">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of students">
+      <td scope="col">{{ student.firstName }}</td>
+      <td scope="col">{{ student.lastName }}</td>
+      <td scope="col">{{ student.email }}</td>
+      <td scope="col">{{ student.dataSource }}</td>
+      <td scope="col">{{ student.email }}</td>
+
+      <td data-bs-toggle="modal" data-bs-target="#info">
+        <i id="icon" class="bi bi-info-circle"></i>
+      </td>
+
+      <td scope="col">
+        <i
+          data-bs-toggle="modal"
+          data-bs-target="#exUpdate"
+          data-bs-whatever="@getbootstrap"
+          (click)="getStudentByMail(student.email)"
+          id="icon"
+          class="bi bi-pencil-square"
+        ></i>
+      </td>
+
+      <td scope="col">
+        <i
+          (click)="deleteStudent(student.id)"
+          id="icon"
+          class="bi bi-person-dash"
+        ></i>
+      </td>
+
+      <div
+        class="modal fade bg-transparent"
+        id="info"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                {{ student.firstName + " " + student.lastName }}
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-title">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                <span class="p-3">Rapor:</span>
+              </h1>
+            </div>
+            <div class="modal-body">
+              {{ student.report }}
+              {{ student.firstName }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </tr>
+  </tbody>
+</table>
+
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+  data-bs-whatever="@getbootstrap"
+>
+  <i class="bi bi-person-fill-add"></i>
+</button>
+<div
+  class="modal fade modal-xl"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Öğrenci Ekleme Formu
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="meetingForm" class="row">
+          <div class="col-md-6">
+            <div class="form-outline mb-4">
+              <label class="form-label" for="firstName"> Adı</label>
+              <input
+                type="text"
+                id="firstName"
+                formControlName="firstName"
+                class="form-control form-control-lg"
+              />
+            </div>
+
+            <div class="form-outline mb-4">
+              <label class="form-label" for="tc"> TC NO</label>
+              <input
+                type="text"
+                id="tc"
+                formControlName="tc"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="no"> Cep Telefonu </label>
+              <input
+                type="tel"
+                id="no"
+                formControlName="no"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="collectionAmount">
+                Satış Tutarı
+              </label>
+              <input
+                type="input"
+                id="collectionAmount"
+                formControlName="collectionAmount"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="advancePay"> Peşinat </label>
+              <input
+                type="input"
+                id="advancePay"
+                formControlName="advancePay"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="numberBills"> Senet Sayısı </label>
+              <input
+                type="input"
+                id="numberBills"
+                formControlName="numberBills"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="staff"> Conf Personeli</label>
+              <select class="form-select p-2" formControlName="staff">
+                <option value="instagram">İnstagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="website">Web Site</option>
+                <option value="ref">Referans</option>
+                <option value="outsidecaller">Dışarıdan Arayan</option>
+                <option value="outsideincoming">Dışarıdan Gelen</option>
+                <option value="another">Diğer...</option>
+              </select>
+            </div>
+
+            <div class="form-outline mb-4">
+              <label class="form-label" for="educationHistory"
+                >Eğitime Başlama Tarihi</label
+              >
+              <input
+                type="datetime-local"
+                id="educationHistory"
+                formControlName="educationHistory"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="location"> Adres </label>
+              <input
+                type="input"
+                id="location"
+                formControlName="location"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="regHistory">Kayıt Tarihi</label>
+              <input
+                type="datetime-local"
+                id="regHistory"
+                formControlName="regHistory"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="dataSource">Data Kaynağı</label>
+              <select class="form-select p-2" formControlName="dataSource">
+                <option value="instagram">İnstagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="website">Web Site</option>
+                <option value="ref">Referans</option>
+                <option value="outsidecaller">Dışarıdan Arayan</option>
+                <option value="outsideincoming">Dışarıdan Gelen</option>
+                <option value="another">Diğer...</option>
+              </select>
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="careerCounselor"
+                >Kariyer Danışmanı</label
+              >
+              <select class="form-select p-2" formControlName="careerCounselor">
+                <option value="instagram">İnstagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="website">Web Site</option>
+                <option value="ref">Referans</option>
+                <option value="outsidecaller">Dışarıdan Arayan</option>
+                <option value="outsideincoming">Dışarıdan Gelen</option>
+                <option value="another">Diğer...</option>
+              </select>
+            </div>
+
+            <div class="form-outline mb-4">
+              <label class="form-label" for="lastName"> Soyadı</label>
+              <input
+                type="text"
+                id="lastName"
+                formControlName="lastName"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="email"> Emaili</label>
+              <input
+                type="text"
+                id="email"
+                formControlName="email"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="collection"> Ödeme</label>
+              <input
+                type="text"
+                id="collection"
+                formControlName="collection"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="careerCounselor"
+                >Kariyer Danışmanı</label
+              >
+              <select class="form-select p-2" formControlName="careerCounselor">
+                <option value="instagram">İnstagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="website">Web Site</option>
+                <option value="ref">Referans</option>
+                <option value="outsidecaller">Dışarıdan Arayan</option>
+                <option value="outsideincoming">Dışarıdan Gelen</option>
+                <option value="another">Diğer...</option>
+              </select>
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="staff"> Conf Personeli</label>
+              <select class="form-select p-2" formControlName="staff">
+                <option value="instagram">İnstagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="website">Web Site</option>
+                <option value="ref">Referans</option>
+                <option value="outsidecaller">Dışarıdan Arayan</option>
+                <option value="outsideincoming">Dışarıdan Gelen</option>
+                <option value="another">Diğer...</option>
+              </select>
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="report">Yorum</label>
+              <textarea
+                id="report"
+                formControlName="report"
+                cols="136"
+                rows="5"
+              ></textarea>
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="paymentHistory"
+                >Ödeme Tarihi</label
+              >
+              <input
+                type="datetime-local"
+                id="paymentHistory"
+                formControlName="educationHistory"
+                class="form-control form-control-lg"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-outline mb-4">
+              <label class="form-label" for="no">No</label>
+              <input
+                type="text"
+                id="no"
+                formControlName="no"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="dataSource">Data Kaynağı</label>
+              <select class="form-select p-2" formControlName="dataSource">
+                <option value="instagram">İnstagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="website">Web Site</option>
+                <option value="ref">Referans</option>
+                <option value="outsidecaller">Dışarıdan Arayan</option>
+                <option value="outsideincoming">Dışarıdan Gelen</option>
+                <option value="another">Diğer...</option>
+              </select>
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="paymentMethod">Ödeme Şekli</label>
+              <select class="form-select p-2" formControlName="paymentMethod">
+                <option value="outsidecaller">Dışarıdan Arayan</option>
+                <option value="outsideincoming">Dışarıdan Gelen</option>
+              </select>
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="interestedEducation"
+                >İlgilendiği Eğitim</label
+              >
+              <input
+                type="text"
+                id="interestedEducation"
+                formControlName="interestedEducation"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="isReg">Kayıt Oldu mu</label>
+              <select class="form-select p-2" formControlName="isReg">
+                <option value="" disabled selected></option>
+                <option value="yes">Oldu</option>
+                <option value="no">Olmadı</option>
+                <option value="later">Ertelendi</option>
+                <option value="else">Gerçekleşmedi</option>
+              </select>
+            </div>
+            <div class="form-outline mb-4">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#yesReg"
+                data-bs-whatever="@getbootstrap"
+              >
+                <i class="bi bi-person-fill-add">Kayıt Oldu</i>
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#noReg"
+                data-bs-whatever="@getbootstrap"
+              >
+                <i class="bi bi-person-fill-add">Kayıt Olmadı</i>
+              </button>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg btn-block"
+            (click)="add()"
+          >
+            Öğrenci Ekle
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>

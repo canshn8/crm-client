@@ -1,0 +1,25 @@
+@if (isAuthenticated() == true) {
+
+<div class="container">
+  <div class="row">
+    <app-navi></app-navi>
+    <!-- <div class="col-md-3">
+      </div> -->
+    <div class="col-md-9 mx-auto">
+      <router-outlet></router-outlet>
+    </div>
+    <app-footer></app-footer>
+  </div>
+</div>
+} @else if (isAuthenticated() == false;){
+<div class="container">
+  <div class="row">
+    <!-- <div class="col-md-3">
+      </div> -->
+    <div class="col-md-9 mx-auto">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+}

@@ -1,0 +1,174 @@
+<div class="row">
+  <div class="col-8">
+    <div style="width: 100%">
+      <canvas id="pie" height="600" width="600"></canvas>
+    </div>
+  </div>
+  <div class="col-4">
+    <div>Ödemesi Olanlar veya Herhangi Bir Şey Bos Kalmasın!</div>
+  </div>
+</div>
+<!-- <div style="width: 100%;"><canvas id="bar" height="600" width="600"></canvas></div> -->
+<app-student *ngFor="let detail of details" [studentsDetailModel]="detail" />
+
+<div class="row text-center">
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+        class="btn btn-primary"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()"
+      >
+        Önceki Ay
+      </div>
+      <div
+        class="btn btn-outline-secondary"
+        mwlCalendarToday
+        [(viewDate)]="viewDate"
+      >
+        Bugün
+      </div>
+      <div
+        class="btn btn-primary"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()"
+      >
+        Gelecek Ay
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view
+    *ngSwitchCase="CalendarView.Month"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [activeDayIsOpen]="activeDayIsOpen"
+    (dayClicked)="dayClicked($event.day)"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view
+    *ngSwitchCase="CalendarView.Week"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="CalendarView.Day"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-day-view>
+</div>
+
+<br /><br /><br />
+<div class="row">
+  <div *ngFor="let event of students" class="container m-2">
+    <div
+      *ngIf="event.isReg == 'yes'"
+      class="yes"
+      [style.backgroundColor]="yesColor"
+    ></div>
+    <div
+      *ngIf="event.isReg == 'no'"
+      class="no"
+      [style.backgroundColor]="noColor"
+    ></div>
+    <div
+      *ngIf="event.isReg == 'later'"
+      class="later"
+      [style.backgroundColor]="laterColor"
+    ></div>
+    <div
+      *ngIf="event.isReg == 'else'"
+      class="else"
+      [style.backgroundColor]="elseColor"
+    ></div>
+    <div class="wrapper row">
+      <span>
+        <p>
+          <span>
+            Ad Soyad
+            <h2>{{ event.firstName + " " + event.lastName }}</h2>
+          </span>
+          <span>
+            Numarası
+            <h2>{{ event.no }}</h2>
+          </span>
+          <span>
+            Email
+            <h2>
+              {{ event.email }}
+            </h2>
+          </span>
+          <span>
+            Kaynağı
+            <h2>
+              {{ event.dataSource }}
+            </h2>
+          </span>
+          <span>
+            Eğitim
+            <h2>
+              {{ event.interestedEducation }}
+            </h2>
+          </span>
+          <span>
+            Kariyer Danışmanı
+            <h2>
+              {{ event.careerCounselor }}
+            </h2> </span
+          ><span>
+            Eğitim
+            <h2>
+              {{ event.staff }}
+            </h2>
+          </span>
+        </p>
+      </span>
+    </div>
+    <div class="button-wrapper">
+      <!-- <button class="btn outline">Yorum Yaz.</button> -->
+      <button [routerLink]="'/student/' + event.id" class="btn outline">
+        Kartı Aç
+      </button>
+    </div>
+  </div>
+</div>
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Event action occurred</h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      Action:
+      <pre>{{ modalData?.action }}</pre>
+    </div>
+    <div>
+      Event:
+      <pre>{{ modalData?.event | json }}</pre>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">
+      OK
+    </button>
+  </div>
+</ng-template>

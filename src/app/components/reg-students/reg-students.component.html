@@ -1,0 +1,276 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Ad Soyad</th>
+      <th scope="col">TC NO</th>
+      <th scope="col">Cep Telefonu</th>
+      <th scope="col">Email</th>
+      <th scope="col">Satış Tutarı</th>
+      <th scope="col">Peşinat</th>
+      <th scope="col">Senet Sayısı</th>
+      <th scope="col">Conf Personeli</th>
+      <th scope="col">Kayıt Tarihi</th>
+      <th scope="col">Eğitime Başlama Tarihi</th>
+      <th scope="col">Kariyer Danışmanı</th>
+      <th scope="col">Data Kaynağı</th>
+      <th scope="col">İlgilendiği Eğitim</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let studentSt of studentsStarting">
+      <td scope="col">{{ studentSt.name }}</td>
+      <td scope="col">{{ studentSt.tc }}</td>
+      <td scope="col">{{ studentSt.no }}</td>
+      <td scope="col">{{ studentSt.email }}</td>
+      <td scope="col">{{ studentSt.collectionAmount }}</td>
+      <td scope="col">{{ studentSt.advancePay }}</td>
+      <td scope="col">{{ studentSt.numberBills }}</td>
+      <td scope="col">{{ studentSt.staff }}</td>
+      <td scope="col">{{ studentSt.regHistory | formatDate }}</td>
+      <td scope="col">{{ studentSt.educationHistory | formatDate }}</td>
+      <td scope="col">{{ studentSt.careerCounselor }}</td>
+      <td scope="col">{{ studentSt.dataSource }}</td>
+      <td scope="col">{{ studentSt.interestedEducation }}</td>
+
+      <td data-bs-toggle="modal" data-bs-target="#info">
+        <i id="icon" class="bi bi-info-circle"></i>
+      </td>
+      <!-- 
+        <td scope="col">
+          <i data-bs-toggle="modal" data-bs-target="#exUpdate" data-bs-whatever="@getbootstrap"
+            (click)="getStudentByMail(student.email)" id="icon" class="bi bi-pencil-square"></i>
+        </td>
+  
+        <td scope="col">
+          <i (click)="deleteStudent(student.id)" id="icon" class="bi bi-person-dash"></i>
+        </td> -->
+
+      <div
+        class="modal fade bg-transparent"
+        id="info"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                {{ studentSt.name }}
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-title">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                <span class="p-3">Rapor:</span>
+              </h1>
+            </div>
+            <div class="modal-body">
+              {{ studentSt.name }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </tr>
+  </tbody>
+</table>
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#yesReg"
+  data-bs-whatever="@getbootstrap"
+>
+  <i class="bi bi-person-fill-add">Kayıt Oldu</i>
+</button>
+<div
+  class="modal fade modal-xl"
+  id="yesReg"
+  tabindex="-1"
+  aria-labelledby="yesReg"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Kaydı Başlatma Formu
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="startingForm" class="row">
+          <div class="col-md-6">
+            <div class="form-outline mb-4">
+              <label class="form-label" for="nameSt"> Adı Soyadı</label>
+              <input
+                type="text"
+                id="nameSt"
+                formControlName="nameSt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="emailSt"> Emaili</label>
+              <input
+                type="text"
+                id="emailSt"
+                formControlName="emailSt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="tcSt"> TC NO</label>
+              <input
+                type="text"
+                id="tcSt"
+                formControlName="tcSt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="noSt"> Cep Telefonu </label>
+              <input
+                type="tel"
+                id="noSt"
+                formControlName="noSt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="collectionAmountSt">
+                Satış Tutarı
+              </label>
+              <input
+                type="input"
+                id="collectionAmountSt"
+                formControlName="collectionAmountSt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="advancePaySt"> Peşinat </label>
+              <input
+                type="input"
+                id="advancePaySt"
+                formControlName="advancePaySt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="numberBillsSt">
+                Senet Sayısı
+              </label>
+              <input
+                type="input"
+                id="numberBillsSt"
+                formControlName="numberBillsSt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="staffSt"> Conf Personeli</label>
+              <select class="form-select p-2" formControlName="staffSt">
+                <option value="instagram">İnstagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="website">Web Site</option>
+                <option value="ref">Referans</option>
+                <option value="outsidecaller">Dışarıdan Arayan</option>
+                <option value="outsideincoming">Dışarıdan Gelen</option>
+                <option value="another">Diğer...</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-outline mb-4">
+              <label class="form-label" for="interestedEducationSt"
+                >İlgilendiği Eğitim</label
+              >
+              <input
+                type="text"
+                id="interestedEducationSt"
+                formControlName="interestedEducationSt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="educationHistorySt"
+                >Eğitime Başlama Tarihi</label
+              >
+              <input
+                type="datetime-local"
+                id="educationHistorySt"
+                formControlName="educationHistorySt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="locationSt"> Adres </label>
+              <input
+                type="input"
+                id="locationSt"
+                formControlName="locationSt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="regHistorySt">Kayıt Tarihi</label>
+              <input
+                type="datetime-local"
+                id="regHistorySt"
+                formControlName="regHistorySt"
+                class="form-control form-control-lg"
+              />
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="dataSourceSt">Data Kaynağı</label>
+              <select class="form-select p-2" formControlName="dataSourceSt">
+                <option value="instagram">İnstagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="website">Web Site</option>
+                <option value="ref">Referans</option>
+                <option value="outsidecaller">Dışarıdan Arayan</option>
+                <option value="outsideincoming">Dışarıdan Gelen</option>
+                <option value="another">Diğer...</option>
+              </select>
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="careerCounselorSt"
+                >Kariyer Danışmanı</label
+              >
+              <select
+                class="form-select p-2"
+                formControlName="careerCounselorSt"
+              >
+                <option value="instagram">İnstagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="website">Web Site</option>
+                <option value="ref">Referans</option>
+                <option value="outsidecaller">Dışarıdan Arayan</option>
+                <option value="outsideincoming">Dışarıdan Gelen</option>
+                <option value="another">Diğer...</option>
+              </select>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg btn-block"
+            (click)="addStartingReg()"
+          >
+            Kaydı Başlat
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>

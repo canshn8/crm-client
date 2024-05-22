@@ -1,0 +1,17 @@
+#icon{
+  font-size: 20px;
+}
+#icon:hover{
+  color: rgb(124, 124, 124);
+  cursor: pointer;
+}
+
+#btnIconAdd{
+  font-size: 30px;
+  border: none;
+  background-color: transparent;
+  position: sticky;
+  bottom: 3%;
+  margin-left: 120%;
+  
+}
